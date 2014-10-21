@@ -1,7 +1,14 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Just like the example, makeCacheMatrix is structured identically,
+## with set and get to set and get, respectively, getinv and setinv 
+## to get and set the inverse, but setinv should not be used by itself,
+## it is called by the cacheSolve function.  Both makeCacheMatrix and 
+## cacheSolve should only be fed an invertable matrix.  No error checking
+## is done, per the examples.
+##
 
-## Write a short comment describing this function
+## makeCacheMatrix - generates a list with a matrix and its inverse,
+## Inverse set to all NA until the cacheSolve function is called
+## against it.
 
 makeCacheMatrix <- function(x = matrix()) {
   d <- dim(x)
@@ -16,13 +23,7 @@ makeCacheMatrix <- function(x = matrix()) {
   get <- function() x
   getinv <- function() xinv
   setinv <- function(inverse) xinv <<- inverse
-#  setmean <- function(mean) m <<- mean
-#  getmean <- function() m
   list(set = set, get = get, setinv=setinv, getinv=getinv)
-#  list(set = set, get = get,
-#       setmean = setmean,
-#       getmean = getmean)
-
 }
 
 ## Function to calculate and cache the inverse of a matrix
@@ -37,6 +38,6 @@ cacheSolve <- function(x, ...) {
   g <- x$get()
   xinverse <- ginv(g)
   x$setinv(xinverse)
-  xinverse
         ## Return a matrix that is the inverse of 'x'
+  xinverse
 }
